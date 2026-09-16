@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickAid — Emergency & Blood Donor Connect</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="brand">🩸 QuickAid<span class="dot">.</span></div>
+    <nav class="links" id="navLinks">
+      <button data-page="home" class="active">Home</button>
+      <button data-page="register">Register Donor</button>
+      <button data-page="find">Find Donors</button>
+      <button data-page="contacts">Emergency Contacts</button>
+      <button data-page="about">About</button>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <h1>Emergency help, one search away</h1>
+      <p>QuickAid connects people who need blood urgently with registered donors nearby — and keeps emergency numbers within reach, always.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" data-goto="register">Become a Donor</button>
+        <button class="btn btn-outline" data-goto="find">Find a Donor</button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="num" id="statDonors">0</div><div class="lbl">Registered Donors</div></div>
+      <div class="stat-card"><div class="num" id="statCities">0</div><div class="lbl">Cities Covered</div></div>
+      <div class="stat-card"><div class="num">24/7</div><div class="lbl">Emergency Access</div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">Why QuickAid?</h2>
+      <p class="section-sub" style="margin-bottom:14px;">Blood requests are usually scattered across WhatsApp forwards, hospital notice boards, and social media — QuickAid puts it all in one searchable place.</p>
+      <ul style="color:var(--text-muted); padding-left:18px; margin:0;">
+        <li>Search donors instantly by blood group and city</li>
+        <li>Register in under a minute — no login required</li>
+        <li>Emergency helpline numbers always visible</li>
+        <li>Works fully offline once loaded — your data stays on your device</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="page" id="page-register">
+    <h2 class="section-title">Register as a Donor</h2>
+    <p class="section-sub">Your details are saved on this device and shown to anyone searching on it.</p>
+    <div class="card">
+      <div class="success-banner" id="regSuccess">✅ Registered successfully! Thank you for signing up.</div>
+      <form class="grid-form" id="donorForm" novalidate>
+        <div>
+          <label for="dName">Full Name</label>
+          <input type="text" id="dName" placeholder="e.g. Abinaya B">
+          <div class="error-msg" id="err-dName"></div>
+        </div>
+        <div>
+          <label for="dBlood">Blood Group</label>
+          <select id="dBlood">
+            <option value="">Select</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+          </select>
+          <div class="error-msg" id="err-dBlood"></div>
+        </div>
+        <div>
+          <label for="dCity">City</label>
+          <input type="text" id="dCity" placeholder="e.g. Madurai">
+          <div class="error-msg" id="err-dCity"></div>
+        </div>
+        <div>
+          <label for="dPhone">Phone Number</label>
+          <input type="tel" id="dPhone" placeholder="10-digit mobile number">
+          <div class="error-msg" id="err-dPhone"></div>
+        </div>
+        <div class="full">
+          <button type="submit" class="btn btn-solid">Register as Donor</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FIND -->
+  <section class="page" id="page-find">
+    <h2 class="section-title">Find Donors</h2>
+    <p class="section-sub">Filter by blood group and city to find someone who can help.</p>
+    <div class="card">
+      <div class="filter-row">
+        <div>
+          <label for="fBlood">Blood Group</label>
+          <select id="fBlood">
+            <option value="">All groups</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+          </select>
+        </div>
+        <div>
+          <label for="fCity">City</label>
+          <input type="text" id="fCity" placeholder="Type a city...">
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Blood Group</th><th>City</th><th>Contact</th></tr>
+        </thead>
+        <tbody id="donorTableBody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">No donors match your search yet. Try a different filter, or be the first to register!</div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="page" id="page-contacts">
+    <h2 class="section-title">Emergency Contacts</h2>
+    <p class="section-sub">Save these numbers — they matter most in the first few minutes.</p>
+    <div class="contact-grid">
+      <div class="contact-card"><div class="icon">🚑</div><div>Ambulance</div><div class="num">108</div></div>
+      <div class="contact-card"><div class="icon">🩸</div><div>Blood Bank Helpline</div><div class="num">104</div></div>
+      <div class="contact-card"><div class="icon">🚓</div><div>Police</div><div class="num">100</div></div>
+      <div class="contact-card"><div class="icon">🔥</div><div>Fire & Rescue</div><div class="num">101</div></div>
+      <div class="contact-card"><div class="icon">🏥</div><div>National Health Helpline</div><div class="num">1075</div></div>
+      <div class="contact-card"><div class="icon">👩</div><div>Women's Helpline</div><div class="num">1091</div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="page" id="page-about">
+    <h2 class="section-title">About Blood Donation</h2>
+    <p class="section-sub">A few things worth knowing before you register.</p>
+    <div id="accordion"></div>
+  </section>
+
+</main>
+
+<footer>QuickAid — a student web design project · Built with HTML, CSS & JavaScript</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
